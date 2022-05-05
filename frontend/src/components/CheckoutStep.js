@@ -1,0 +1,50 @@
+import React, { Fragment } from "react";
+import { Typography, Stepper, StepLabel, Step } from "@material-ui/core";
+import LocalShippingIcon from "@material-ui/icons/LocalShipping";
+import LibraryAddCheckIcon from "@material-ui/icons/LibraryAddCheck";
+import AccountBalanceIcon from "@material-ui/icons/AccountBalance";
+
+const CheckoutStep = ({ activeStep }) => {
+    const steps = [
+        {
+            label: <Typography>Thông tin giao hàng</Typography>,
+            icon: <LocalShippingIcon />,
+        },
+        {
+            label: <Typography>Xác nhận đơn</Typography>,
+            icon: <LibraryAddCheckIcon />,
+        },
+        {
+            label: <Typography>Thành Công</Typography>,
+            icon: <AccountBalanceIcon />,
+        },
+    ];
+
+    const stepStyles = {
+        boxSizing: "border-box",
+    };
+    return (
+        <Fragment>
+            <Stepper alternativeLabel activeStep={activeStep} style={stepStyles}>
+                {steps.map((item, index) => (
+                    <Step
+                        key={index}
+                        active={activeStep === index ? true : false}
+                        completed={activeStep >= index ? true : false}
+                    >
+                        <StepLabel
+                            style={{
+                                color: activeStep >= index ? "teal" : "rgba(0, 0, 0, 0.649)",
+                            }}
+                            icon={item.icon}
+                        >
+                            {item.label}
+                        </StepLabel>
+                    </Step>
+                ))}
+            </Stepper>
+        </Fragment>
+    )
+}
+
+export default CheckoutStep
